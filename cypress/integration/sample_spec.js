@@ -22,7 +22,7 @@ describe("PARTNER TOOL LANDING PAGE", () => {
     cy.url()
       .should('include', '/partner-platform')
       .go('back')
-})
+  })
 
   it(" tests the input fields for functionality", () => {
    
@@ -38,8 +38,13 @@ describe("PARTNER TOOL LANDING PAGE", () => {
 describe("USER HOME PAGE", () => {
   it('tests the practice button', () => {
     cy.get('button[class="btn dark-vnl-cancel-button font-weight-bold m-2 btn-secondary"]').click()
-    cy.get('button[class="btn btn-info small-btn-outline-info"]').click()
-    cy.url()
-      .should('include', '/survey/v2/project_overview.php')
-  })
-})
+    // cy.get('button[class="btn btn-info small-btn-outline-info"]').click()
+    cy.get('.arrow')
+      .should('be.visible')
+  });
+  it('tests the sanbox button', () => {
+    cy.get('button[class="btn orange-vnl-cancel-button font-weight-bold m-2 btn-secondary"]').click()
+      .get('.arrow')
+      .should('be.visible')
+  });
+});
