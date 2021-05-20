@@ -1,7 +1,11 @@
 describe("PARTNER TOOL LANDING PAGE", () => {
   beforeEach(() => {});
   it("TESTS THE HEADER", () => {
-    cy.visit("https://aspen.visiblenetworklabs.com/users/");
+    cy.visit("https://aspen.visiblenetworklabs.com/users/", {
+      onBeforeLoad(win) {
+        cy.stub(win, 'open')
+      }
+    });
     cy.get(".app > header > a").should(
       "have.attr",
       "href",
@@ -47,4 +51,20 @@ describe("USER HOME PAGE", () => {
       .get('.arrow')
       .should('be.visible')
   });
+  // it('tests the purchase button', () => {
+  //   cy.get('.text-white').contains('PURCHASE').click()
+  // })
+
+
 });
+
+describe('window open', () => {
+  it('opens window to purchase page with user home page', () => {
+    cy.window().then((win) => {
+      cy.stub(win, 'open').as('window open')
+    })
+    cy.get('.text-white').contains('PURCHASE').click()
+  })
+})
+
+// cy.window().its('open').should('be.called')
